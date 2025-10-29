@@ -1,0 +1,176 @@
+# Decompiled on Wed Oct 22 10:47:33 2025
+
+# ----- <module> (code object) -----
+# filename: <catalyst_core>
+# name: <module>
+# argcount: 0, kwonly: 0, posonly: 0
+# varnames: ()
+# names: ('os', 'sys', 'emoji', 'random', 'asyncio', 'cowsay', 'pyjokes', 'art', 'arc4', 'ARC4', 'activate_catalyst', 'run')
+# constants: [0]:int, [1]:NoneType, [2]:tuple, [3]:<code activate_catalyst>
+# flags: 0
+
+# Disassembly (annotated):
+# 0000 RESUME               
+# 0002 LOAD_CONST           0
+# 0004 LOAD_CONST           None
+# 0006 IMPORT_NAME          os
+# 0008 STORE_NAME           os
+# 0010 LOAD_CONST           0
+# 0012 LOAD_CONST           None
+# 0014 IMPORT_NAME          sys
+# 0016 STORE_NAME           sys
+# 0018 LOAD_CONST           0
+# 0020 LOAD_CONST           None
+# 0022 IMPORT_NAME          emoji
+# 0024 STORE_NAME           emoji
+# 0026 LOAD_CONST           0
+# 0028 LOAD_CONST           None
+# 0030 IMPORT_NAME          random
+# 0032 STORE_NAME           random
+# 0034 LOAD_CONST           0
+# 0036 LOAD_CONST           None
+# 0038 IMPORT_NAME          asyncio
+# 0040 STORE_NAME           asyncio
+# 0042 LOAD_CONST           0
+# 0044 LOAD_CONST           None
+# 0046 IMPORT_NAME          cowsay
+# 0048 STORE_NAME           cowsay
+# 0050 LOAD_CONST           0
+# 0052 LOAD_CONST           None
+# 0054 IMPORT_NAME          pyjokes
+# 0056 STORE_NAME           pyjokes
+# 0058 LOAD_CONST           0
+# 0060 LOAD_CONST           None
+# 0062 IMPORT_NAME          art
+# 0064 STORE_NAME           art
+# 0066 LOAD_CONST           0
+# 0068 LOAD_CONST           ('ARC4',)
+# 0070 IMPORT_NAME          arc4
+# 0072 IMPORT_FROM          ARC4
+# 0074 STORE_NAME           ARC4
+# 0076 POP_TOP              
+# 0078 LOAD_CONST           <code object activate_catalyst at 0x7ef6a61ab000, file "<catalyst_core>", line 15>
+# 0080 MAKE_FUNCTION        
+# 0082 STORE_NAME           activate_catalyst
+# 0084 PUSH_NULL            
+# 0086 LOAD_NAME            asyncio
+# Disassembly failed: tuple index out of range
+# co_argcount=0, co_kwonlyargcount=0, co_posonlyargcount=0
+# len(co.co_names)=12, len(co.co_consts)=4, len(co.co_varnames)=0
+# Raw bytecode (hex, first 256 bytes): b'9700640064016c005a00640064016c015a01640064016c025a02640064016c035a03640064016c045a04640064016c055a05640064016c065a06640064016c075a07640064026c086d095a090100640384005a0a020065046a160000000000000000000000000000000000000200650aab0000000000000000000000000000000100a601'
+
+def activate_catalyst():
+    # ----- activate_catalyst (code object) -----
+    # filename: <catalyst_core>
+    # name: activate_catalyst
+    # argcount: 0, kwonly: 0, posonly: 0
+    # varnames: ('LEAD_RESEARCHER_SIGNATURE', 'ENCRYPTED_CHIMERA_FORMULA', 'current_user', 'user_signature', 'status', 'arc4_decipher', 'decrypted_formula', 'joke', 'animals')
+    # names: ('print', 'os', 'getlogin', 'encode', 'bytes', 'enumerate', 'asyncio', 'sleep', 'art', 'tprint', 'ARC4', 'decrypt', 'decode', 'cowsay', 'cow', 'pyjokes', 'get_joke', 'char_names', 'get_output_string', 'random', 'choice', 'sys', 'exit')
+    # constants: [0]:NoneType, [1]:bytes, [2]:bytes, [3]:str('--- Catalyst Serum Injected ---'), [4]:str("Verifying Lead Researcher's credentials via biometric scan..."), [5]:<code <genexpr>>, [6]:float, [7]:str('pending'), [8]:str('AUTHENTICATION   SUCCESS'), [9]:str('small'), [10]:tuple, [11]:str('Biometric scan MATCH. Identity confirmed as Lead Researcher.'), [12]:str('Finalizing Project Chimera...'), [13]:str('I am alive! The secret formula is:\n'), [14]:str('AUTHENTICATION   FAILED'), [15]:str('Impostor detected, my genius cannot be replicated!'), [16]:str('The resulting specimen has developed an unexpected, and frankly useless, sense of humor.'), [17]:str('en'), [18]:str('all'), [19]:tuple, [20]:int, [21]:str('System error: Unknown experimental state.')
+    # flags: 131
+
+    # Disassembly (annotated):
+    # 0000 RETURN_GENERATOR     
+    # 0002 POP_TOP              
+    # 0004 RESUME               
+    # 0006 LOAD_CONST           b'm\x1b@I\x1dAoe@\x07ZF[BL\rN\n\x0cS'
+    # 0008 STORE_FAST           LEAD_RESEARCHER_SIGNATURE
+    # 0010 LOAD_CONST           b'r2b-\r\x9e\xf2\x1fp\x185\x82\xcf\xfc\x90\x14\xf1O\xad#]\xf3\xe2\xc0L\xd0\xc1e\x0c\xea\xec\xae\x11b\xa7\x8c\xaa!\xa1\x9d\xc2\x90'
+    # 0012 STORE_FAST           ENCRYPTED_CHIMERA_FORMULA
+    # 0014 LOAD_GLOBAL          NULL + print
+    # 0026 CALL                 
+    # 0036 LOAD_GLOBAL          NULL + print
+    # 0048 CALL                 
+    # 0058 LOAD_GLOBAL          NULL + os
+    # 0070 CACHE                
+    # 0072 CACHE                
+    # 0074 CACHE                
+    # 0076 CACHE                
+    # 0078 CACHE                
+    # 0080 CACHE                
+    # 0082 CACHE                
+    # 0084 CACHE                
+    # 0086 CACHE                
+    # 0088 CALL                 
+    # 0098 CACHE                
+    # 0100 CACHE                
+    # 0102 CACHE                
+    # 0104 CACHE                
+    # 0106 CACHE                
+    # 0108 CACHE                
+    # 0110 CACHE                
+    # 0112 CACHE                
+    # 0114 CACHE                
+    # 0116 CALL                 
+    # 0126 LOAD_GLOBAL          NULL + bytes
+    # 0138 MAKE_FUNCTION        
+    # 0140 LOAD_GLOBAL          NULL + enumerate
+    # 0152 CALL                 
+    # 0162 CALL                 
+    # 0172 CACHE                
+    # 0174 CACHE                
+    # 0176 CACHE                
+    # 0178 STORE_FAST           user_signature
+    # 0180 LOAD_GLOBAL          NULL + asyncio
+    # 0192 CACHE                
+    # 0194 CACHE                
+    # 0196 CACHE                
+    # 0198 CACHE                
+    # 0200 CACHE                
+    # 0202 CACHE                
+    # 0204 CACHE                
+    # 0206 CACHE                
+    # 0208 CACHE                
+    # 0210 LOAD_CONST           0.01
+    # 0212 CALL                 
+    # 0222 LOAD_CONST           None
+    # 0224 SEND                 to 232
+    # 0226 CACHE                
+    # 0228 RESUME               
+    # 0230 RESUME               
+    # 0232 JUMP_BACKWARD_NO_INTERRUPT to 224
+    # 0234 BINARY_OP            +
+    # 0238 LOAD_CONST           'pending'
+    # 0240 STORE_FAST           status
+    # 0242 LOAD_FAST            status
+    # 0244 LOAD_CONST           'pending'
+    # Disassembly failed: tuple index out of range
+    # co_argcount=0, co_kwonlyargcount=0, co_posonlyargcount=0
+    # len(co.co_names)=23, len(co.co_consts)=22, len(co.co_varnames)=9
+    # Raw bytecode (hex, first 256 bytes): b'4b000100970064017d0064027d01740100000000000000000000ab010000000000000000740100000000000000000000ab010000000000000000740300000000000000000000000000000000000000000000000000000000ab000000000000000000000000000000000000000000000000000000ab0000000000000000007409000000000000000000008400740b00000000000000000000ab010000000000000000ab0000000000000000000000000000007d03740d000000000000000000000000000000000000000000000000000000006406ab01000000000000000064007b0300009702970386057a00000064077d047c0464076b280000000072267c03'
+
+    def <genexpr>(.0):
+        # ----- <genexpr> (code object) -----
+        # filename: <catalyst_core>
+        # name: <genexpr>
+        # argcount: 1, kwonly: 0, posonly: 0
+        # varnames: ('.0', 'i', 'c')
+        # names: ()
+        # constants: [0]:int, [1]:NoneType
+        # flags: 51
+
+        # Disassembly (annotated):
+        # 0000 RETURN_GENERATOR     
+        # 0002 POP_TOP              
+        # 0004 RESUME               
+        # 0006 LOAD_FAST            .0
+        # 0008 FOR_ITER             to 40
+        # 0010 CACHE                
+        # 0012 UNPACK_SEQUENCE      
+        # 0016 STORE_FAST           i
+        # 0018 STORE_FAST           c
+        # 0020 LOAD_FAST            c
+        # 0022 LOAD_FAST            i
+        # 0024 LOAD_CONST           42
+        # 0026 BINARY_OP            +
+        # 0030 BINARY_OP            ^
+        # 0034 RESUME               
+        # 0036 RESUME               
+        # 0038 POP_TOP              
+        # 0040 JUMP_BACKWARD        to 8
+        # 0042 BINARY_OP            +
+        # 0046 POP_JUMP_BACKWARD_IF_NOT_NONE to 42
+        # 0048 RERAISE              
+
+
+

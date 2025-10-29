@@ -1,0 +1,6 @@
+Permutation: decompressed_blob1_blob3
+Offset used: 0
+Raw saved at: pyc_attempts\attempt_raw_decompressed_blob1_blob3.bin
+Successful slice saved at: pyc_attempts\successful_slice_decompressed_blob1_blob3_off0.bin
+Written .pyc: pyc_attempts\chimera_payload_decompressed_blob1_blob3_off0.pyc
+marshal.loads produced code object: <code object <module> at 0x00000233EED6E6F0, file "<catalyst_core>", line 1>
