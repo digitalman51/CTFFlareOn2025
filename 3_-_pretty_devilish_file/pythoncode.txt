@@ -1,0 +1,140 @@
+# Further stego analysis on /mnt/data/extracted_image.jpg and the LSB-extracted byte stream.
+import binascii, re, zlib, base64
+from PIL import Image
+path = "/mnt/data/extracted_image.jpg"
+lsb_path = "/mnt/data/lsb_extracted.bin"
+data = open(path, "rb").read()
+
+# 1) Direct pixel bytes -> ASCII
+img = Image.open(path)
+pixels = list(img.getdata())
+# flatten if tuple
+flat = []
+for p in pixels:
+    if isinstance(p, tuple):
+        flat.extend(p)
+    else:
+        flat.append(p)
+direct_bytes = bytes(flat)
+try:
+    direct_text = direct_bytes.decode('utf-8')
+except:
+    direct_text = direct_bytes.decode('latin-1', errors='replace')
+
+print("Direct pixel-by-byte ASCII (37 chars expected):")
+print(direct_text)
+
+# 2) Read the saved LSB-extracted byte stream
+lsb_bytes = b""
+try:
+    lsb_bytes = open(lsb_path, "rb").read()
+    print("\nLSB-extracted raw bytes length:", len(lsb_bytes))
+except Exception as e:
+    print("\nNo LSB file found or couldn't read it:", e)
+
+# Try to find printable runs in lsb_bytes
+runs = re.findall(rb"[\x20-\x7E]{4,}", lsb_bytes)
+print("\nPrintable runs in LSB raw bytes:", runs[:10])
+
+# 3) Try various decodings on candidate bytes (lsb_bytes and direct_bytes)
+candidates = {"direct": direct_bytes, "lsb": lsb_bytes, "jpeg-bytes": data}
+
+def try_interpret(name, b):
+    out = {"name": name, "len": len(b), "printable_runs": re.findall(rb"[\x20-\x7E]{4,}", b)[:10], "utf8": None, "hex": None, "base64_decoded": None, "zlib_decompressed": None}
+    try:
+        out["utf8"] = b.decode('utf-8')
+    except Exception as e:
+        out["utf8"] = None
+    out["hex"] = binascii.hexlify(b)[:200]
+    # try base64 decode (if looks like base64)
+    try:
+        s = b.decode('ascii', errors='ignore').strip()
+        if re.fullmatch(r'[A-Za-z0-9+/=\s]+', s) and len(s.strip())>16:
+            try:
+                dec = base64.b64decode(s)
+                out["base64_decoded"] = dec[:200]
+            except:
+                out["base64_decoded"] = None
+    except:
+        pass
+    # try zlib decompress
+    for w in (15, -15):
+        try:
+            dec = zlib.decompress(b, wbits=w)
+            out["zlib_decompressed"] = dec[:200]
+            break
+        except:
+            pass
+    return out
+
+results = {}
+for k,v in candidates.items():
+    results[k] = try_interpret(k, v)
+
+print("\nInterpretation summary:")
+for k,r in results.items():
+    print(f"- {k}: len={r['len']}, printable_runs={r['printable_runs']} zlib_ok={'yes' if r['zlib_decompressed'] else 'no'}")
+
+# 4) Single-byte XOR brute force on lsb_bytes and direct_bytes to search for readable ASCII
+def single_byte_xor_search(b):
+    findings = []
+    for key in range(256):
+        xb = bytes([c ^ key for c in b])
+        runs = re.findall(rb"[\x20-\x7E]{6,}", xb)
+        if runs:
+            findings.append((key, runs[:3], xb[:200]))
+    return findings
+
+print("\nSingle-byte XOR search on LSB bytes...")
+xor_lsb = single_byte_xor_search(lsb_bytes) if lsb_bytes else []
+print("Found", len(xor_lsb), "candidates")
+if xor_lsb:
+    for k, runs, sample in xor_lsb[:6]:
+        print(" key",k, "runs:", runs)
+
+print("\nSingle-byte XOR search on direct pixel bytes...")
+xor_direct = single_byte_xor_search(direct_bytes)
+print("Found", len(xor_direct), "candidates")
+if xor_direct:
+    for k, runs, sample in xor_direct[:6]:
+        print(" key",k, "runs:", runs)
+
+# 5) Try reversing bit order within each byte of lsb_bytes and direct_bytes, then search printable runs
+def reverse_bits_in_byte(b):
+    return int('{:08b}'.format(b)[::-1],2)
+
+def reverse_bits_bytes(bs):
+    return bytes(reverse_bits_in_byte(c) for c in bs)
+
+rev_lsb = reverse_bits_bytes(lsb_bytes) if lsb_bytes else b""
+rev_direct = reverse_bits_bytes(direct_bytes)
+
+print("\nPrintable in reversed-bits direct bytes:", re.findall(rb"[\x20-\x7E]{6,}", rev_direct)[:10])
+print("Printable in reversed-bits lsb bytes:", re.findall(rb"[\x20-\x7E]{6,}", rev_lsb)[:10])
+
+# Save any promising decodes
+out_texts = {}
+out_texts['direct.txt'] = direct_text
+if xor_direct:
+    out_texts['direct_xor_sample.txt'] = xor_direct[0][2].decode('latin-1', errors='replace')
+if rev_direct and re.search(rb"[\x20-\x7E]{6,}", rev_direct):
+    out_texts['direct_revbits.txt'] = rev_direct.decode('latin-1', errors='replace')
+
+for fname, content in out_texts.items():
+    with open(f"/mnt/data/{fname}", "wb") as f:
+        if isinstance(content, str):
+            f.write(content.encode('utf-8', errors='replace'))
+        else:
+            f.write(content)
+
+print("\nSaved decoded text files:", list(out_texts.keys()))
+
+# Print final notable outputs for chat
+notable = {
+    "direct_text_preview": direct_text,
+    "lsb_printables": re.findall(rb"[\x20-\x7E]{4,}", lsb_bytes)[:10],
+    "xor_lsb_count": len(xor_lsb),
+    "xor_direct_count": len(xor_direct),
+    "reversed_bits_direct_printables": re.findall(rb"[\x20-\x7E]{6,}", rev_direct)[:10],
+}
+notable

@@ -1,0 +1,6 @@
+🐍 Python Code: Extract All Images from a PDF
+
+
+pip install PyMuPDF
+
+python extract_images.py
